@@ -1,0 +1,14 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MonthlyBasis\\Laminas\\": "src/",
+            "MonthlyBasis\\LaminasTest\\": "test/"
+        }
+    },
+    "name": "monthly-basis/laminas",
+    "license": "MIT",
+    "require": {
+        "laminas/laminas-db": "^2.9",
+        "laminas/laminas-test": "^4.0"
+    }
+}
