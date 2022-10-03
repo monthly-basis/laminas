@@ -6,11 +6,8 @@ namespace MonthlyBasis\Laminas\Model\Db;
 
 class Table
 {
+    private \Laminas\Db\Sql\Sql $sql;
     private string $table;
-
-    public function __construct(
-        protected \Laminas\Db\Sql\Sql $sql
-    ) {}
 
     public function insert(
         array $values,
@@ -42,6 +39,12 @@ class Table
         }
 
         return $this->sql->prepareStatementForSqlObject($select)->execute();
+    }
+
+    public function setSql(\Laminas\Db\Sql\Sql $sql): self
+    {
+        $this->sql = $sql;
+        return $this;
     }
 
     public function setTable(string $table): self

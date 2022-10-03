@@ -21,8 +21,11 @@ class TableTest extends TestCase
         $sqlString = file_get_contents($sqlPath);
         $adapter->query($sqlString)->execute();
 
-        $this->laminasTable = new LaminasDb\Table($sql);
-        $this->laminasTable->setTable('table');
+        $this->laminasTable = new LaminasDb\Table();
+        $this->laminasTable
+            ->setSql($sql)
+            ->setTable('table')
+        ;
     }
 
     public function test_insert_values_result()
