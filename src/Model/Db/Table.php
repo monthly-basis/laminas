@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace MonthlyBasis\Laminas\Model\Db;
 
-
 class Table
 {
-    private \Laminas\Db\Adapter\Adapter $adapter;
-    private \Laminas\Db\Sql\Sql $sql;
-    private string $table;
+    protected \Laminas\Db\Adapter\Adapter $adapter;
+    protected \Laminas\Db\Sql\Sql $sql;
+    protected string $table;
 
     public function getAdapter(): \Laminas\Db\Adapter\Adapter
     {
