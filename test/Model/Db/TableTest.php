@@ -73,6 +73,15 @@ class TableTest extends TestCase
     {
         $this->assertSame(
             $this->laminasTable,
+            $this->laminasTable->setAdapter($this->sql->getAdapter())
+        );
+        $this->assertSame(
+            $this->sql->getAdapter(),
+            $this->laminasTable->getAdapter()
+        );
+
+        $this->assertSame(
+            $this->laminasTable,
             $this->laminasTable->setSql($this->sql)
         );
         $this->assertSame(

@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace MonthlyBasis\Laminas\Model\Db;
 
+
 class Table
 {
+    private \Laminas\Db\Adapter\Adapter $adapter;
     private \Laminas\Db\Sql\Sql $sql;
     private string $table;
+
+    public function getAdapter(): \Laminas\Db\Adapter\Adapter
+    {
+        return $this->adapter;
+    }
 
     public function getSql(): \Laminas\Db\Sql\Sql
     {
@@ -49,6 +56,12 @@ class Table
         }
 
         return $this->sql->prepareStatementForSqlObject($select)->execute();
+    }
+
+    public function setAdapter(\Laminas\Db\Adapter\Adapter $adapter)
+    {
+        $this->adapter = $adapter;
+        return $this;
     }
 
     public function setSql(\Laminas\Db\Sql\Sql $sql): self
