@@ -9,6 +9,16 @@ class Table
     private \Laminas\Db\Sql\Sql $sql;
     private string $table;
 
+    public function getSql(): \Laminas\Db\Sql\Sql
+    {
+        return $this->sql;
+    }
+
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
     public function insert(
         array $values,
         array $columns = null,

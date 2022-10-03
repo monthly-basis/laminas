@@ -11,7 +11,7 @@ class TableTest extends TestCase
         $configArray = require($_SERVER['PWD'] . '/config/autoload/local.php');
         $configArray = $configArray['db']['adapters']['test'];
         $adapter = new \Laminas\Db\Adapter\Adapter($configArray);
-        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $this->sql = new \Laminas\Db\Sql\Sql($adapter);
 
         $sqlPath = $_SERVER['PWD'] . '/sql/test/table/drop.sql';
         $sqlString = file_get_contents($sqlPath);
@@ -23,7 +23,7 @@ class TableTest extends TestCase
 
         $this->laminasTable = new LaminasDb\Table();
         $this->laminasTable
-            ->setSql($sql)
+            ->setSql($this->sql)
             ->setTable('table')
         ;
     }
@@ -66,6 +66,28 @@ class TableTest extends TestCase
                 'name'     => 'bar',
             ],
             $result->current()
+        );
+    }
+
+    public function test_settersAndGetters()
+    {
+        $this->assertSame(
+            $this->laminasTable,
+            $this->laminasTable->setSql($this->sql)
+        );
+        $this->assertSame(
+            $this->sql,
+            $this->laminasTable->getSql()
+        );
+
+        $table = 'table';
+        $this->assertSame(
+            $this->laminasTable,
+            $this->laminasTable->setTable($table)
+        );
+        $this->assertSame(
+            $table,
+            $this->laminasTable->getTable()
         );
     }
 }
