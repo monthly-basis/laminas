@@ -6,7 +6,7 @@ namespace MonthlyBasis\Laminas\Model\Db;
 
 class Table
 {
-    protected string $table;
+    private string $table;
 
     public function __construct(
         protected \Laminas\Db\Sql\Sql $sql
