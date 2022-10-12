@@ -54,10 +54,47 @@ class TableTest extends TestCase
                 'name'     => 'bar',
             ],
         );
+        $this->laminasTable->insert(
+            values: [
+                'name'     => 'baz',
+            ],
+        );
 
         $result = $this->laminasTable->select(
             where: [
+                'name'     => 'baz',
+            ],
+        );
+        $this->assertSame(
+            [
+                'table_id' => 3,
+                'name'     => 'baz',
+            ],
+            $result->current()
+        );
+    }
+
+    public function test_select_order_result()
+    {
+        $this->laminasTable->insert(
+            values: [
+                'name'     => 'foo',
+            ],
+        );
+        $this->laminasTable->insert(
+            values: [
                 'name'     => 'bar',
+            ],
+        );
+        $this->laminasTable->insert(
+            values: [
+                'name'     => 'baz',
+            ],
+        );
+
+        $result = $this->laminasTable->select(
+            order: [
+                'name ASC',
             ],
         );
         $this->assertSame(

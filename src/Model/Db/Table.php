@@ -43,6 +43,7 @@ class Table
     public function select(
         array $columns = null,
         array $where = null,
+        array $order = null,
     ): \Laminas\Db\Adapter\Driver\Pdo\Result {
         $select = $this->sql->select($this->table);
 
@@ -52,6 +53,10 @@ class Table
 
         if (isset($where)) {
             $select->where($where);
+        }
+
+        if (isset($order)) {
+            $select->order($order);
         }
 
         return $this->sql->prepareStatementForSqlObject($select)->execute();
