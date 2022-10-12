@@ -42,6 +42,7 @@ class Table
 
     public function select(
         array $columns = null,
+        array $joinArguments = null,
         array $where = null,
         array $order = null,
     ): \Laminas\Db\Adapter\Driver\Pdo\Result {
@@ -49,6 +50,10 @@ class Table
 
         if (isset($columns)) {
             $select->columns($columns);
+        }
+
+        if (isset($joinArguments)) {
+            $select->join(...$joinArguments);
         }
 
         if (isset($where)) {
