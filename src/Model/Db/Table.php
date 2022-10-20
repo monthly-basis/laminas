@@ -47,6 +47,8 @@ class Table
         array $joinArguments = null,
         array|Where $where = null,
         array $order = null,
+        int $limit = null,
+        int $offset = null,
     ): \Laminas\Db\Adapter\Driver\Pdo\Result {
         $select = $this->sql->select($this->table);
 
@@ -64,6 +66,14 @@ class Table
 
         if (isset($order)) {
             $select->order($order);
+        }
+
+        if (isset($limit)) {
+            $select->limit($limit);
+        }
+
+        if (isset($offset)) {
+            $select->offset($offset);
         }
 
         return $this->sql->prepareStatementForSqlObject($select)->execute();
