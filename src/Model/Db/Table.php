@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MonthlyBasis\Laminas\Model\Db;
 
+use Laminas\Db\Sql\Where;
+
 class Table
 {
     protected \Laminas\Db\Adapter\Adapter $adapter;
@@ -43,7 +45,7 @@ class Table
     public function select(
         array $columns = null,
         array $joinArguments = null,
-        array $where = null,
+        array|Where $where = null,
         array $order = null,
     ): \Laminas\Db\Adapter\Driver\Pdo\Result {
         $select = $this->sql->select($this->table);
