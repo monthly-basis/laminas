@@ -46,7 +46,7 @@ class Table
         array $columns = null,
         array $joinArguments = null,
         array|Where $where = null,
-        array $order = null,
+        array|string $order = null,
         int $limit = null,
         int $offset = null,
     ): \Laminas\Db\Adapter\Driver\Pdo\Result {
