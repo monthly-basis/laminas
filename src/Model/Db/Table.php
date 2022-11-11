@@ -96,4 +96,19 @@ class Table
         $this->table = $table;
         return $this;
     }
+
+    public function update(
+        array $set,
+        array|Where $where = null,
+    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+        $update = $this->sql->update($this->table);
+
+        $update->set($set);
+
+        if (isset($where)) {
+            $update->where($where);
+        }
+
+        return $this->sql->prepareStatementForSqlObject($update)->execute();
+    }
 }

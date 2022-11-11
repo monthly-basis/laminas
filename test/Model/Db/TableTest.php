@@ -136,4 +136,45 @@ class TableTest extends TestCase
             $this->laminasTable->getTable()
         );
     }
+
+    public function test_update()
+    {
+        $result = $this->laminasTable->insert(
+            values: [
+                'table_id' => 1,
+                'name'     => 'foo',
+            ],
+        );
+        $result = $this->laminasTable->insert(
+            values: [
+                'table_id' => 2,
+                'name'     => 'bar',
+            ],
+        );
+        $result = $this->laminasTable->update(
+            set: [
+                'name'     => 'baz',
+            ],
+            where: [
+                'table_id' => 1,
+            ],
+        );
+        $this->assertSame(
+            1,
+            $result->getAffectedRows()
+        );
+
+        $result = $this->laminasTable->select(
+            columns: [
+                'name'
+            ],
+            where: [
+                'table_id' => 1,
+            ],
+        );
+        $this->assertSame(
+            'baz',
+            $result->current()['name']
+        );
+    }
 }
