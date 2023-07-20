@@ -42,6 +42,21 @@ class Table
         return $this->sql->prepareStatementForSqlObject($insert)->execute();
     }
 
+    public function insertIgnore(
+        array $values,
+        array $columns = null,
+    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+        $insertIgnore = new \Laminas\Db\Sql\InsertIgnore($this->table);
+
+        if (isset($columns)) {
+            $insertIgnore->columns($columns);
+        }
+
+        $insertIgnore->values($values);
+
+        return $this->sql->prepareStatementForSqlObject($insertIgnore)->execute();
+    }
+
     public function select(
         array $columns = null,
         array $joinArguments = null,

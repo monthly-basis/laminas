@@ -42,6 +42,20 @@ class TableTest extends TestCase
         );
     }
 
+    public function test_insertIgnore_values_result()
+    {
+        $result = $this->laminasTable->insertIgnore(
+            values: [
+                'table_id' => 1,
+                'name'     => 'foo',
+            ],
+        );
+        $this->assertSame(
+            1,
+            $result->getAffectedRows()
+        );
+    }
+
     public function test_select_where_result()
     {
         $this->laminasTable->insert(
