@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MonthlyBasis\Laminas\Model\Db;
 
+use Laminas\Db\Adapter\Driver\Pdo\Result;
 use Laminas\Db\Sql\Where;
 
 class Table
@@ -29,7 +30,7 @@ class Table
 
     public function delete(
         array $where
-    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+    ): Result {
         $delete = $this->sql->delete()->from($this->table);
         $delete->where($where);
         return $this->sql->prepareStatementForSqlObject($delete)->execute();
@@ -38,7 +39,7 @@ class Table
     public function insert(
         array $values,
         array $columns = null,
-    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+    ): Result {
         $insert = $this->sql->insert()->into($this->table);
 
         if (isset($columns)) {
@@ -53,7 +54,7 @@ class Table
     public function insertIgnore(
         array $values,
         array $columns = null,
-    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+    ): Result {
         $insertIgnore = new \Laminas\Db\Sql\InsertIgnore($this->table);
 
         if (isset($columns)) {
@@ -72,7 +73,7 @@ class Table
         array|string $order = null,
         int $limit = null,
         int $offset = null,
-    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+    ): Result {
         $select = $this->sql->select($this->table);
 
         if (isset($columns)) {
@@ -123,7 +124,7 @@ class Table
     public function update(
         array $set,
         array|Where $where = null,
-    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+    ): Result {
         $update = $this->sql->update($this->table);
 
         $update->set($set);
