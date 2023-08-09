@@ -28,6 +28,37 @@ class TableTest extends TestCase
         ;
     }
 
+    public function test_delete()
+    {
+        $result = $this->laminasTable->delete(
+            where: [
+                'table_id' => 1,
+                'name'     => 'foo',
+            ],
+        );
+        $this->assertSame(
+            0,
+            $result->getAffectedRows()
+        );
+
+        $this->laminasTable->insert(
+            values: [
+                'table_id' => 1,
+                'name'     => 'foo',
+            ],
+        );
+        $result = $this->laminasTable->delete(
+            where: [
+                'table_id' => 1,
+                'name'     => 'foo',
+            ],
+        );
+        $this->assertSame(
+            1,
+            $result->getAffectedRows()
+        );
+    }
+
     public function test_insert_values_result()
     {
         $result = $this->laminasTable->insert(

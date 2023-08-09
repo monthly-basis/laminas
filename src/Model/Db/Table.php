@@ -27,6 +27,14 @@ class Table
         return $this->table;
     }
 
+    public function delete(
+        array $where
+    ): \Laminas\Db\Adapter\Driver\Pdo\Result {
+        $delete = $this->sql->delete()->from($this->table);
+        $delete->where($where);
+        return $this->sql->prepareStatementForSqlObject($delete)->execute();
+    }
+
     public function insert(
         array $values,
         array $columns = null,
